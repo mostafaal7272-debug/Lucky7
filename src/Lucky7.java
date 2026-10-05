@@ -3,60 +3,49 @@ import java.util.Scanner;
 
 public class Lucky7 {
     public static void main(String[] args) {
-        Random random = new Random();
         Scanner lukija = new Scanner(System.in);
-        int rahat;
+        Random arpoja = new Random();
 
-        while (true) {
-            System.out.print("Paljonko rahaa otat mukaan (vähintään 1 €)? ");
-            if (!lukija.hasNextLine()) return;
-            try {
-                rahat = Integer.parseInt(lukija.nextLine().trim());
-                if (rahat >= 1) break;
-            } catch (NumberFormatException virhe) {
-                // Kysytään uudelleen, jos syöte ei ole kokonaisluku.
-            }
-            System.out.println("Anna positiivinen kokonaisluku.");
-        }
+        System.out.print("Paljonko rahaa haluat pelata? ");
+        int rahat = lukija.nextInt();
+        lukija.nextLine();
 
-        while (rahat >= 1) {
-            rahat--; // Yksi kierros maksaa yhden euron.
-            int numero1 = random.nextInt(10) + 1;
-            int numero2 = random.nextInt(10) + 1;
-            int numero3 = random.nextInt(10) + 1;
+        while (rahat > 0) {
+            rahat = rahat - 1;
 
-            System.out.println("Arvotut numerot: " + numero1 + ", " + numero2 + ", " + numero3);
+            int numero1 = arpoja.nextInt(10) + 1;
+            int numero2 = arpoja.nextInt(10) + 1;
+            int numero3 = arpoja.nextInt(10) + 1;
+            System.out.println("Numerot: " + numero1 + " " + numero2 + " " + numero3);
 
             int seiskat = 0;
             if (numero1 == 7) seiskat++;
             if (numero2 == 7) seiskat++;
             if (numero3 == 7) seiskat++;
 
-            if (seiskat > 0) {
-                int voitto = 2 * seiskat + 1; // 1 → 3 €, 2 → 5 €, 3 → 7 €.
-                rahat += voitto;
-                System.out.println("Voitit " + voitto + " €!");
+            if (seiskat == 1) {
+                rahat = rahat + 3;
+                System.out.println("Voitit 3 euroa!");
+            } else if (seiskat == 2) {
+                rahat = rahat + 5;
+                System.out.println("Voitit 5 euroa!");
+            } else if (seiskat == 3) {
+                rahat = rahat + 7;
+                System.out.println("Voitit 7 euroa!");
             } else {
-                System.out.println("Hävisit.");
-            }
-            System.out.println("Rahaa jäljellä: " + rahat + " €\n");
-
-            if (rahat == 0) {
-                System.out.println("Rahat loppuivat. Peli päättyy.");
-                return;
+                System.out.println("Ei voittoa.");
             }
 
-            while (true) {
-                System.out.print("Haluatko pelata uudestaan? Enter = kyllä, e = lopeta: ");
-                if (!lukija.hasNextLine()) return;
-                String vastaus = lukija.nextLine().trim();
-                if (vastaus.isEmpty()) break;
-                if (vastaus.equalsIgnoreCase("e")) {
-                    System.out.println("Kiitos pelaamisesta! Rahaa jäi " + rahat + " €.");
-                    return;
+            System.out.println("Rahaa jäljellä: " + rahat + " euroa");
+            if (rahat > 0) {
+                System.out.print("Pelataanko uudestaan? Enter = kyllä, e = ei: ");
+                String vastaus = lukija.nextLine();
+                if (vastaus.equals("e")) {
+                    break;
                 }
-                System.out.println("Paina Enter jatkaaksesi tai kirjoita e lopettaaksesi.");
             }
         }
+
+        System.out.println("Peli loppui.");
     }
 }
