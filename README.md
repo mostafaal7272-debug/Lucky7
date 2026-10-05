@@ -1,6 +1,6 @@
 # Lucky7
 
-Java-harjoitus: kolme numeroa arvotaan väliltä 1–10. Jos jokin niistä on seitsemän, pelaaja voittaa.
+Java-harjoitus: kolme numeroa arvotaan väliltä 1–10. Pelaaja aloittaa viidellä eurolla, ja kierros maksaa euron. Yksi seitsemän tuo 3 €, kaksi 5 € ja kolme 7 €. Peli jatkuu, kunnes rahat loppuvat.
 
 ## Käynnistys
 
