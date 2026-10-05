@@ -1,9 +1,23 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Lucky7 {
     public static void main(String[] args) {
         Random random = new Random();
-        int rahat = 5;
+        Scanner lukija = new Scanner(System.in);
+        int rahat;
+
+        while (true) {
+            System.out.print("Paljonko rahaa otat mukaan (vähintään 1 €)? ");
+            if (!lukija.hasNextLine()) return;
+            try {
+                rahat = Integer.parseInt(lukija.nextLine().trim());
+                if (rahat >= 1) break;
+            } catch (NumberFormatException virhe) {
+                // Kysytään uudelleen, jos syöte ei ole kokonaisluku.
+            }
+            System.out.println("Anna positiivinen kokonaisluku.");
+        }
 
         while (rahat >= 1) {
             rahat--; // Yksi kierros maksaa yhden euron.
@@ -26,7 +40,23 @@ public class Lucky7 {
                 System.out.println("Hävisit.");
             }
             System.out.println("Rahaa jäljellä: " + rahat + " €\n");
+
+            if (rahat == 0) {
+                System.out.println("Rahat loppuivat. Peli päättyy.");
+                return;
+            }
+
+            while (true) {
+                System.out.print("Haluatko pelata uudestaan? Enter = kyllä, e = lopeta: ");
+                if (!lukija.hasNextLine()) return;
+                String vastaus = lukija.nextLine().trim();
+                if (vastaus.isEmpty()) break;
+                if (vastaus.equalsIgnoreCase("e")) {
+                    System.out.println("Kiitos pelaamisesta! Rahaa jäi " + rahat + " €.");
+                    return;
+                }
+                System.out.println("Paina Enter jatkaaksesi tai kirjoita e lopettaaksesi.");
+            }
         }
-        System.out.println("Rahat loppuivat. Peli päättyy.");
     }
 }
