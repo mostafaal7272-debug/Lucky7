@@ -36,7 +36,7 @@ public class Lucky7 {
                 System.out.println("Ei voittoa.");
             }
 
-            System.out.println("Rahaa jäljellä: " + rahat + " euroa");
+            System.out.println("Rahaa jaljellä: " + rahat + " euroa");
             if (rahat > 0) {
                 System.out.print("Pelataanko uudestaan? Enter = kyllä, e = ei: ");
                 String vastaus = lukija.nextLine();
